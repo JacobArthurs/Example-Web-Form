@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Importing Bootstrap, jQuery, and Stylesheet -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div id="left-right-margin">
+      <!-- Body start -->
+      <div class="container no-margin-padding">
+        <!-- Hero image, left side -->
+        <div class="col-sm-6 no-margin-padding" id="#img-container">
+          <img src="./resources/hero_img.jpg" id="hero-img" />
+          <div id="img-text">
+            Geofencing: Location-based Technology for Recruitment Strategies.
+          </div>
+        </div>
+        <!-- Input Form, right side -->
+        <div class="col-sm-6 no-margin-padding">
+          <div id="form-blurb">
+            Connect with one of our experts to learn more!
+          </div>
+          <div style="margin-left: 2vw">
+            <div class="form-group">
+              <label class="input-text" for="nameInput">NAME *</label>
+              <input
+                type="text"
+                class="form-control"
+                id="nameInput"
+                name="name"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label class="input-text" for="emailInput">EMAIL *</label>
+              <input
+                type="text"
+                class="form-control"
+                id="emailInput"
+                name="email"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label class="input-text" for="phoneInput">PHONE NUMBER *</label>
+              <input
+                type="text"
+                class="form-control"
+                id="phoneInput"
+                name="phone"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label class="input-text" for="industryInput">INDUSTRY *</label>
+              <input
+                type="text"
+                class="form-control"
+                id="industryInput"
+                name="industry"
+                required
+              />
+            </div>
+            <button id="submitBtn" class="btn btn-primary">SEND AWAY!</button>
+          </div>
+        </div>
+      </div>
+      <!-- Body end -->
+    </div>
+    <!--Snackbar to be used to display user input feedback-->
+    <div id="snackbar"></div>
+    <!-- Footer -->
+    <footer>ALL RIGHTS RESERVED.</footer>
+  </body>
+</html>
+
+<script>
+  //Validate Input
+  $("#submitBtn").click(function () {
+    $.ajax({
+      url: "phpForm.php",
+      type: "POST",
+      dataType: "json",
+      data: {
+        name: $("#nameInput").val(),
+        email: $("#emailInput").val(),
+        phone: $("#phoneInput").val(),
+        industry: $("#industryInput").val(),
+      },
+      success: function (data) {
+        if (data.code == "200") {
+          console.log("success");
+          $("#submitBtn").blur();
+          $("#snackbar").text("Form successfully submitted");
+          $("#snackbar").css("background-color", "#0071f5");
+          $("#snackbar").addClass("show");
+          setTimeout(function () {
+            $("#snackbar").removeClass("show");
+          }, 3000);
+        } else {
+          console.log("failure");
+          console.log(data.msg);
+          $("#submitBtn").blur();
+          $("#snackbar").append(data.msg);
+          $("#snackbar").css("background-color", "black");
+          $("#snackbar").addClass("show");
+          setTimeout(function () {
+            $("#snackbar").removeClass("show");
+            $("#snackbar").empty();
+          }, 3000);
+        }
+      },
+    });
+  });
+</script>
