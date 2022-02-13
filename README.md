@@ -1,4 +1,5 @@
 # Developed by: Jacob Arthurs
+## Visit the project here: https://jacobarthurs.github.io/Example-Web-Form/
 
 This is an example project I created in order to demonstrate my web development aptitude. This project is broken up into 4 distinct parts: the HTML, the CSS, the PHP, and the SQL. I opted to make this project with 4 simple files instead of a framework such as ASP.net simply because with a project of this size it seemed impractical. I also opted to not use a complex library such as react based on the same reasoning. This project is compatible with all screen sizes, including smartphones.
 
